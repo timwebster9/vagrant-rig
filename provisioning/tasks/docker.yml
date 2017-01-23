@@ -1,0 +1,27 @@
+---
+# use shell module for shell variable expansion
+- name: install linux-image-extra for current kernel version
+  shell: apt install -y linux-image-extra-$(uname -r)
+
+- name: add Docker GPG key
+  apt_key:
+    keyserver: hkp://ha.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+
+- name: Add Docker APT Repository
+  become: yes
+  apt_repository:
+    repo: deb https://apt.dockerproject.org/repo ubuntu-xenial main
+    filename: docker
+    update_cache: yes
+
+- name: install docker and related packages
+  apt: name="{{ item }}" state=present
+  with_items:
+   - linux-image-extra-virtual
+   - docker-engine
+
+- name: add vagrant to the docker group
+  user:
+    name: vagrant
+    groups: docker

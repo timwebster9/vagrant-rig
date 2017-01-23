@@ -5,6 +5,7 @@
   gather_facts: no
   pre_tasks:
     - include: tasks/os.yml
+    - include: tasks/docker.yml
     - include: tasks/gitlab.yml
     - include: tasks/db.yml
     - include: tasks/sonarqube.yml
