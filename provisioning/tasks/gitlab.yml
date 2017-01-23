@@ -1,0 +1,8 @@
+- name: Download install script
+  get_url:
+    url: https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh
+    dest: /tmp/script.deb.sh
+    mode: u+rwx
+
+- name: Install Gitlab
+  shell: /tmp/script.deb.sh && apt install gitlab-ce && gitlab-ctl reconfigure

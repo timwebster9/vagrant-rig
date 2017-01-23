@@ -1,0 +1,14 @@
+- name: download and install sonarqube
+  unarchive:
+    src: https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-6.2.zip
+    dest: /opt/sonarqube
+    owner: sonarqube
+    group: sonarqube
+    remote_src: True
+
+- name: copy sonarqube configuration
+  copy:
+    src: ../files/sonar.properties
+    dest: /opt/sonarqube/sonarqube-6.2/conf/sonar.properties
+    owner: sonarqube
+    group: sonarqube
